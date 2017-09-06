@@ -63,28 +63,45 @@ public class Main extends Application {
         
         m.visitar(x, y);
         dibujarPunto(x, y, 1);
-        //Caso Base:
+        
+        /*Caso Base:
+        *
+        */
         if(x == m.getW()-1  &&  y == m.getH()-1){
             dibujarPunto(x, y, 2);
             return true;
         }
-        //////////////////////////
-        else{
-            
+        /*fin Caso Base*/
+
+        /*Si hay espacio vacio hacia arriba llamado recursivo a resolver()*/
         if((m.getData(x, y) & 1) == 1  && !m.esVisitado(x, y-1))
-            resolver (x, y-1);
-        
+            if(resolver (x, y-1)){
+                dibujarPunto(x, y, 2);
+                return true;
+            }
+        /**/
+        /*Si hay espacio vacio hacia abajo llamado recursivo a resolver()*/
         if((m.getData(x, y) & 2) == 2 && !m.esVisitado(x, y+1))
-            resolver (x, y+1);
-        
+            if(resolver (x, y+1)){
+                dibujarPunto(x, y, 2);
+                return true;
+            }
+        /**/
+        /*Si hay espacio vacio hacia la derecha llamado recursivo a resolver()*/
         if((m.getData(x, y) & 4) == 4 && !m.esVisitado(x+1, y))
-            resolver (x+1, y);
-        
+            if(resolver (x+1, y)){
+                dibujarPunto(x, y, 2);
+                return true;
+            }
+        /**/
+        /*Si hay espacio vacio hacia la izquierda llamado recursivo a resolver()*/
         if((m.getData(x, y) & 8) == 8 && !m.esVisitado(x-1, y))
-            resolver (x-1, y);
+            if(resolver (x-1, y)){
+                dibujarPunto(x, y, 2);
+                return true;
+            }
+        /**/
         
-        }
-      
         dibujarPunto(x, y, 0);
         return false;
     }
